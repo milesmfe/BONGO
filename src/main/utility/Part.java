@@ -16,7 +16,8 @@ public class Part extends Node {
     private static final long serialVersionUID = 1L;
     private Rectangle Target = new Rectangle(0, 0);
     private boolean InPosition = false; public boolean InPosition() { return InPosition; }
-
+    private int Lenience = 0;
+    
     public Part(String image, int width, int height) {
         super(image, width, height);
         setSize(width, height);
@@ -29,6 +30,11 @@ public class Part extends Node {
 
     public Part Target(int x, int y) {
         Target = new Rectangle(x, y, getWidth(), getHeight());
+        return this; 
+    }
+
+    public Part Lenience(int value) {
+        Lenience = value;
         return this; 
     }
 
@@ -48,5 +54,9 @@ public class Part extends Node {
 
     public Rectangle GetTarget() {
         return Target;
+    }
+
+    public Rectangle GetTargetArea() {
+        return new Rectangle(Target.x - Lenience / 2, Target.y - Lenience / 2, Target.width + Lenience, Target.height + Lenience);
     }
 }

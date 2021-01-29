@@ -21,10 +21,10 @@ import main.utility.ImageLoader;
 public class App extends JFrame {
     private static final long serialVersionUID = 1L;
     public static Dimension Size() { return new Dimension(
-            Toolkit.getDefaultToolkit().getScreenSize().width / 2,
-            Toolkit.getDefaultToolkit().getScreenSize().height / 2); }
-    private CardLayout ViewManager = new CardLayout();
-    private JPanel View;
+            Toolkit.getDefaultToolkit().getScreenSize().width * 3 / 4,
+            Toolkit.getDefaultToolkit().getScreenSize().height * 3 / 4); }
+    private static CardLayout ViewManager = new CardLayout();
+    private static JPanel View;
 
     public App() {
         setTitle("BONGO");
@@ -42,7 +42,11 @@ public class App extends JFrame {
         View = new JPanel();
         View.setPreferredSize(Size());
         View.setLayout(ViewManager);
-        View.add(new Motherboard(), "motherboard");
+        View.add(new Motherboard(), "Motherboard");
+    }
+
+    public static void ChangePage(String pageName) {
+        ViewManager.show(View, pageName);
     }
 
     public static void main(String[] args) throws Exception {

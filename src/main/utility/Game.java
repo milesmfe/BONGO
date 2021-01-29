@@ -13,7 +13,6 @@ package main.utility;
 import java.awt.Color;
 import java.awt.event.*;
 import java.util.ArrayList;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 import main.App;
 import java.awt.Graphics;
@@ -28,7 +27,7 @@ public class Game extends JPanel {
     private Point DragOffset;
     private Project _Project;
     private boolean Dragging;
-    private boolean ProjectSet = false;
+    private boolean Started = false; public boolean Started() { return Started; }
 
     public Game() {
         Parts = new ArrayList<Part>();
@@ -40,38 +39,29 @@ public class Game extends JPanel {
 
     public void BuildUI() {
         setBackground(Color.decode("#EDF0E8"));
-
-        // Disperse Parts Button
-        JButton Btn = new JButton("Disperse Parts");
-        Btn.setBounds(App.Size().width / 2 - 60, 5, 120, 30);
-        add(Btn);
-        Btn.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e) {
-                DisperseParts();
-            }
-        });
-
+        
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
-                Point point = e.getPoint();
-                Part part = FindPart(point);
-
-                if (part != null) {
-                    DragPart = part;
-                    DragPnt = point;
-                    DragOffset = part.getMousePosition();
-                    Dragging = true;
-                    part.setVisible(false);
-                    repaint();
+                if (!CheckComplete()) {
+                    Point point = e.getPoint();
+                    Part part = FindPart(point);
+                    if (part != null) {
+                        DragPart = part;
+                        DragPnt = point;
+                        DragOffset = part.getMousePosition();
+                        Dragging = true;
+                        part.setVisible(false);
+                        repaint();
+                    }
                 }
             }
             @Override
             public void mouseReleased(MouseEvent e) {
                 super.mouseReleased(e);
                 if (Dragging) {
-                    if(DragPart.GetTarget().contains(DragPnt)) {
+                    if(DragPart.GetTargetArea().contains(DragPnt)) {
                         DragPart.MoveToTarget();
                     }
                     Dragging = false;
@@ -117,8 +107,8 @@ public class Game extends JPanel {
     }
 
     public void AddPart(Part part) {
-        if (!ProjectSet) {
-            add(part); Parts.add(part);
+        if (!Started) {
+            part.setVisible(false); add(part); Parts.add(part);
         }
     }
 
@@ -126,11 +116,11 @@ public class Game extends JPanel {
         return (int) ((Math.random() * (max - min)) + min);
     }
 
-    private void DisperseParts() {
+    public void DisperseParts() {
         for (Part part: Parts) {
             Rectangle rect = new Rectangle(
                 RandomNumber(0, App.Size().width - part.getWidth()),
-                RandomNumber(0, App.Size().height - part.getHeight()), 
+                RandomNumber(0, App.Size().height - part.getHeight()),
                 part.getWidth(),
                 part.getHeight()
             );
@@ -138,8 +128,9 @@ public class Game extends JPanel {
                 rect = new Rectangle(RandomNumber(0, App.Size().width), RandomNumber(0, App.Size().height), part.getWidth(), part.getHeight());
             } 
             part.Source(rect.x, rect.y);
+            part.setVisible(true);
             part.Reset();
-        }
+        } Started = true;
     }
 
     public void SetProject(Project project) {
@@ -148,7 +139,5 @@ public class Game extends JPanel {
         for (Part part: Parts) {
             part.Target(point.x + part.GetTarget().x, point.y + part.GetTarget().y);
         }
-        DisperseParts();
-        ProjectSet = true;
     }
 }

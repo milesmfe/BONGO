@@ -11,38 +11,53 @@ package main.gamemodes;
 
 import main.utility.Part;
 import main.utility.Project;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JButton;
+import main.App;
 import main.utility.Game;
 
 public class Motherboard extends Game {
     private static final long serialVersionUID = 1L;
 
     public Motherboard() {
-        new Part("resources/CPU.png", 58, 58)
-            .Source(300, 0)
-            .Target(168, 22)
+
+        // Disperse Parts Button
+        JButton Btn = new JButton("Disperse Parts");
+        Btn.setBounds(App.Size().width / 2 - 60, 5, 120, 30);
+        add(Btn);
+        Btn.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                DisperseParts();
+            }
+        });
+
+        new Part("resources/CPU.png", 116, 116)
+            .Target(336, 44)
+            .Lenience(10)
             .Add(this);
 
-        new Part("resources/GPU.png", 26, 26)
-            .Source(300, 0)
-            .Target(160, 114)
+        new Part("resources/GPU.png", 52, 52)
+            .Target(320, 228)
+            .Lenience(5)
             .Add(this);
 
-        new Part("resources/RAM.png", 110, 4)
-            .Source(300, 0)
-            .Target(32, 14)
+        new Part("resources/RAM.png", 220, 8)
+            .Target(64, 28)
+            .Lenience(50)
             .Add(this);
 
-        new Part("resources/RAM.png", 110, 4)
-            .Source(300, 0)
-            .Target(32, 34)
+        new Part("resources/RAM.png", 220, 8)
+            .Target(64, 68)
+            .Lenience(50)
             .Add(this);
 
-        new Part("resources/BIOS-CMOS.png", 34, 50)
-            .Source(300, 0)
-            .Target(166, 168)
+        new Part("resources/BIOS-CMOS.png", 68, 100)
+            .Target(332, 336)
+            .Lenience(5)
             .Add(this);
 
-        new Project("resources/Motherboard.png", 262, 248)
+        new Project("resources/Motherboard.png", 524, 496)
             .Add(this);
     }
 }
