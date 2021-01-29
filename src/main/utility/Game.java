@@ -13,8 +13,6 @@ package main.utility;
 import java.awt.Color;
 import java.awt.event.*;
 import java.util.ArrayList;
-
-import javax.swing.JComponent;
 import javax.swing.JPanel;
 import main.App;
 import java.awt.Graphics;
