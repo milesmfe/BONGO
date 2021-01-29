@@ -13,6 +13,8 @@ package main.utility;
 import java.awt.Color;
 import java.awt.event.*;
 import java.util.ArrayList;
+
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import main.App;
 import java.awt.Graphics;
@@ -116,17 +118,29 @@ public class Game extends JPanel {
         return (int) ((Math.random() * (max - min)) + min);
     }
 
+    private Rectangle RandomRect(Part part) {
+        return new Rectangle(
+            RandomNumber(0, App.Size().width - part.getWidth()),
+            RandomNumber(0, App.Size().height - part.getHeight()),
+            part.getWidth(),
+            part.getHeight()
+        );
+    }
+
+    private boolean Overlapping(Rectangle rect) {
+        for (Part part: Parts) {
+            if (rect.intersects(part.getBounds())) { return true; }
+        } 
+        if (rect.intersects(_Project.getBounds())) { return true; }
+        return false;
+    }
+
     public void DisperseParts() {
         for (Part part: Parts) {
-            Rectangle rect = new Rectangle(
-                RandomNumber(0, App.Size().width - part.getWidth()),
-                RandomNumber(0, App.Size().height - part.getHeight()),
-                part.getWidth(),
-                part.getHeight()
-            );
-            while (rect.intersects(_Project.getBounds())) {
-                rect = new Rectangle(RandomNumber(0, App.Size().width), RandomNumber(0, App.Size().height), part.getWidth(), part.getHeight());
-            } 
+            Rectangle rect = RandomRect(part);
+            while (Overlapping(rect)) {
+                rect = RandomRect(part);
+            }
             part.Source(rect.x, rect.y);
             part.setVisible(true);
             part.Reset();
