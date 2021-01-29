@@ -21,8 +21,8 @@ import main.utility.ImageLoader;
 public class App extends JFrame {
     private static final long serialVersionUID = 1L;
     public static Dimension Size() { return new Dimension(
-            Toolkit.getDefaultToolkit().getScreenSize().width * 3 / 4,
-            Toolkit.getDefaultToolkit().getScreenSize().height * 3 / 4); }
+            Toolkit.getDefaultToolkit().getScreenSize().width / 2,
+            Toolkit.getDefaultToolkit().getScreenSize().height / 2); }
     private static CardLayout ViewManager = new CardLayout();
     private static JPanel View;
 

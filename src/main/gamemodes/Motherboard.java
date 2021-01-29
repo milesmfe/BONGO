@@ -32,32 +32,32 @@ public class Motherboard extends Game {
             }
         });
 
-        new Part("resources/CPU.png", 116, 116)
-            .Target(336, 44)
+        new Part("resources/CPU.png", 58, 58)
+            .Target(168, 22)
             .Lenience(10)
             .Add(this);
 
-        new Part("resources/GPU.png", 52, 52)
-            .Target(320, 228)
+        new Part("resources/GPU.png", 26, 26)
+            .Target(160, 114)
             .Lenience(5)
             .Add(this);
 
-        new Part("resources/RAM.png", 220, 8)
-            .Target(64, 28)
+        new Part("resources/RAM.png", 110, 4)
+            .Target(32, 14)
             .Lenience(50)
             .Add(this);
 
-        new Part("resources/RAM.png", 220, 8)
-            .Target(64, 68)
+        new Part("resources/RAM.png", 110, 4)
+            .Target(32, 34)
             .Lenience(50)
             .Add(this);
 
-        new Part("resources/BIOS-CMOS.png", 68, 100)
-            .Target(332, 336)
+        new Part("resources/BIOS-CMOS.png", 34, 50)
+            .Target(166, 168)
             .Lenience(5)
             .Add(this);
 
-        new Project("resources/Motherboard.png", 524, 496)
+        new Project("resources/Motherboard.png", 262, 248)
             .Add(this);
     }
 }
