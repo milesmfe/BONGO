@@ -11,9 +11,6 @@ package main.gamemodes;
 
 import main.utility.Part;
 import main.utility.Project;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JButton;
 import main.utility.Game;
 
 public class Motherboard extends Game {
@@ -21,15 +18,8 @@ public class Motherboard extends Game {
 
     public Motherboard() {
 
-        // Disperse Parts Button
-        JButton Btn = new JButton("Disperse Parts");
-        Btn.setBounds(getSize().width / 2 - 60, 5, 120, 30);
-        add(Btn);
-        Btn.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e) {
-                DisperseParts();
-            }
-        });
+        SetTitle("Motherboard");
+        ConfigureCustomBtn("Reset", () -> DisperseParts());
 
         new Part("resources/CPU.png", 58, 58)
             .Target(168, 22)
@@ -58,5 +48,7 @@ public class Motherboard extends Game {
 
         new Project("resources/Motherboard.png", 262, 248)
             .Add(this);
+
+        DisperseParts();
     }
 }

@@ -45,10 +45,15 @@ public class App extends JFrame {
         View.setLayout(ViewManager);
         View.setBackground(Color.decode("#EDF0E8"));
         View.add(new Motherboard(), "Motherboard");
+        View.add(new Menu(), "Menu");
     }
 
     public static void ChangePage(String pageName) {
         ViewManager.show(View, pageName);
+    }
+
+    public static void LastPage() {
+        ViewManager.previous(View);
     }
 
     public static void main(String[] args) throws Exception {

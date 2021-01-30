@@ -24,11 +24,12 @@ public class Game extends Page {
     private Point DragOffset;
     private Project _Project;
     private boolean Dragging = false;
+    private boolean Complete = false;
     private boolean Started = false;
     public boolean Started() { return Started; }
 
     public Game() {
-        setLayout(null);
+        SetTitle("New Game");
         requestFocus();
         ConfigureMouseListeners();
     }
@@ -38,17 +39,15 @@ public class Game extends Page {
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
-                if (!CheckComplete()) {
-                    Point point = e.getPoint();
-                    Part part = FindPart(point);
-                    if (part != null) {
-                        DragPart = part;
-                        DragPnt = point;
-                        DragOffset = part.getMousePosition();
-                        Dragging = true;
-                        part.setVisible(false);
-                        repaint();
-                    }
+                Point point = e.getPoint();
+                Part part = FindPart(point);
+                if (part != null) {
+                    DragPart = part;
+                    DragPnt = point;
+                    DragOffset = part.getMousePosition();
+                    Dragging = true;
+                    part.setVisible(false);
+                    repaint();
                 }
             }
             @Override
@@ -60,7 +59,7 @@ public class Game extends Page {
                     }
                     Dragging = false;
                     DragPart.setVisible(true);
-                    CheckComplete();
+                    if (!Complete) { CheckComplete(); }
                     repaint();
                 }
             }
@@ -89,6 +88,7 @@ public class Game extends Page {
             if (!part.InPosition()) { return false; }
         } 
         System.out.println("Project is complete! Well Done.");
+        Complete = true;
         return true;
     }
 
@@ -124,6 +124,8 @@ public class Game extends Page {
             if (rect.intersects(part.getBounds())) { return true; }
         } 
         if (rect.intersects(_Project.getBounds())) { return true; }
+        if (rect.intersects(GetTopBarBounds())) { return true; }
+        if (rect.intersects(GetBottomBarBounds())) { return true; }
         return false;
     }
 
@@ -136,7 +138,9 @@ public class Game extends Page {
             part.Source(rect.x, rect.y);
             part.setVisible(true);
             part.Reset();
-        } Started = true;
+        } 
+        Started = true;
+        Complete = false;
     }
 
     public void SetProject(Project project) {

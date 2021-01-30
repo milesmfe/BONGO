@@ -1,20 +1,20 @@
 /*
     ------------------------------------------------------
-    Name:           Menu.java
+    Name:           ActionButton.java
     Author:         Miles Edwards
     Date:           Jan 2021
-    Description:    Defines Menu screen object
+    Description:    Defines custom JButton object
     ------------------------------------------------------
 */
 
-package main;
+package main.utility;
 
-import main.utility.Page;
+import javax.swing.JButton;
 
-public class Menu extends Page {
+public class ActionButton extends JButton {
     private static final long serialVersionUID = 1L;
     
-    public Menu() {
-        SetTitle("Menu");
+    public ActionButton(String text) {
+        super(text);
     }
 }
