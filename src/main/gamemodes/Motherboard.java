@@ -14,7 +14,6 @@ import main.utility.Project;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
-import main.App;
 import main.utility.Game;
 
 public class Motherboard extends Game {
@@ -24,7 +23,7 @@ public class Motherboard extends Game {
 
         // Disperse Parts Button
         JButton Btn = new JButton("Disperse Parts");
-        Btn.setBounds(App.Size().width / 2 - 60, 5, 120, 30);
+        Btn.setBounds(getSize().width / 2 - 60, 5, 120, 30);
         add(Btn);
         Btn.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {

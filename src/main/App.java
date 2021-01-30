@@ -15,6 +15,7 @@ import javax.swing.SwingUtilities;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.Color;
 import main.gamemodes.*;
 import main.utility.ImageLoader;
 
@@ -42,6 +43,7 @@ public class App extends JFrame {
         View = new JPanel();
         View.setPreferredSize(Size());
         View.setLayout(ViewManager);
+        View.setBackground(Color.decode("#EDF0E8"));
         View.add(new Motherboard(), "Motherboard");
     }
 

@@ -9,9 +9,9 @@
 
 package main;
 
-import javax.swing.JPanel;
+import main.utility.Page;
 
-public class Menu extends JPanel {
+public class Menu extends Page {
     private static final long serialVersionUID = 1L;
     
     public Menu() {

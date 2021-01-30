@@ -10,36 +10,30 @@
 
 package main.utility;
 
-import java.awt.Color;
 import java.awt.event.*;
 import java.util.ArrayList;
-import javax.swing.JPanel;
-import main.App;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-public class Game extends JPanel {
+public class Game extends Page {
     private static final long serialVersionUID = 1L;
-    private ArrayList<Part> Parts;
+    private ArrayList<Part> Parts = new ArrayList<Part>();
     private Part DragPart;
     private Point DragPnt;
     private Point DragOffset;
     private Project _Project;
-    private boolean Dragging;
-    private boolean Started = false; public boolean Started() { return Started; }
+    private boolean Dragging = false;
+    private boolean Started = false;
+    public boolean Started() { return Started; }
 
     public Game() {
-        Parts = new ArrayList<Part>();
-        Dragging = false;
         setLayout(null);
         requestFocus();
-        BuildUI();
+        ConfigureMouseListeners();
     }
 
-    public void BuildUI() {
-        setBackground(Color.decode("#EDF0E8"));
-        
+    public void ConfigureMouseListeners() {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -118,8 +112,8 @@ public class Game extends JPanel {
 
     private Rectangle RandomRect(Part part) {
         return new Rectangle(
-            RandomNumber(0, App.Size().width - part.getWidth()),
-            RandomNumber(0, App.Size().height - part.getHeight()),
+            RandomNumber(0, getSize().width - part.getWidth()),
+            RandomNumber(0, getSize().height - part.getHeight()),
             part.getWidth(),
             part.getHeight()
         );
