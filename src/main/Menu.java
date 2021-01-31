@@ -9,6 +9,8 @@
 
 package main;
 
+import javax.swing.JLabel;
+import main.utility.ImageLoader;
 import main.utility.Page;
 
 public class Menu extends Page {
@@ -16,5 +18,9 @@ public class Menu extends Page {
     
     public Menu() {
         SetTitle("Menu");
+        JLabel Title = new JLabel();
+        Title.setIcon(ImageLoader.fromPathScaled("resources/Title.gif", 200, 200));
+        Title.setBounds(0, 0, 200, 200);
+        add(Title);
     }
 }

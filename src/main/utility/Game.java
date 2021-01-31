@@ -32,7 +32,8 @@ public class Game extends Page {
         SetTitle("New Game");
         requestFocus();
         ConfigureMouseListeners();
-        BackBtnAction(() -> DisperseParts());
+        ShowTime(true);
+        BackBtnAction(() -> DisperseParts(), "Reset");
     }
 
     public void ConfigureMouseListeners() {

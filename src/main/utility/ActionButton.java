@@ -8,21 +8,30 @@
 */
 
 package main.utility;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseAdapter;
 
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-public class ActionButton extends JButton {
+public class ActionButton extends JLabel {
     private static final long serialVersionUID = 1L;
     private Action _Action;
     
     public ActionButton() {
-        addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e) {
+        super("Action", SwingConstants.CENTER);
+        setFont(FontLoader.Get("resources/fonts/AGENCYB.TTF", 15f));
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                super.mousePressed(e);
                 _Action.run();
             }
         });
+    }
+
+    public ActionButton Icon(String path, int width, int height) {
+        setIcon(ImageLoader.fromPathScaled(path, width, height));
+        return this;
     }
 
     public ActionButton Text(String text) {

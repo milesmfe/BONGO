@@ -22,6 +22,6 @@ public class ImageLoader {
     }
 
     public static ImageIcon fromPathScaled(String path, int Width, int Height) {
-        return new ImageIcon(fromPath(path).getImage().getScaledInstance(Width, Height, Image.SCALE_DEFAULT));
+        return new ImageIcon(fromPath(path).getImage().getScaledInstance(Width, Height, Image.SCALE_SMOOTH));
     }
 }

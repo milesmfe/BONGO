@@ -13,9 +13,10 @@ package main.utility;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.Rectangle;
-import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import main.App;
 
 public class Page extends JPanel {
@@ -26,6 +27,7 @@ public class Page extends JPanel {
     private ActionButton OptionsBtn; 
     private ActionButton BackBtn;
     private JLabel Title;
+    private JLabel Time;
     
     public Page() {
         setOpaque(false);
@@ -35,38 +37,51 @@ public class Page extends JPanel {
     }
 
     private void ConfigureTopBar() { 
-        TopBar = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        TopBar = new JPanel(new GridLayout());
         TopBar.setBackground(new Color(0, 0, 0, 10));
         TopBar.setBounds(0, 0, getWidth(), (int)(getHeight() * TopBarCover));
         add(TopBar);
 
         HomeBtn = new ActionButton()
-            .Text("H")
+            .Text("Home")
             .Action(() -> App.ChangePage("Menu"));
         
         OptionsBtn = new ActionButton()
-            .Text("O")
+            .Text("Options")
             .Action(() -> App.ChangePage("Options"));
 
         BackBtn = new ActionButton()
-            .Text("B")
+            .Text("Back")
             .Action(() -> App.LastPage());
 
-        Title = new JLabel("New Page");
+        Title = new JLabel("New Page", SwingConstants.CENTER);
         Title.setFont(FontLoader.Get("resources/fonts/AGENCYB.TTF", 15f));
 
-        TopBar.add(HomeBtn);
-        TopBar.add(OptionsBtn);
-        TopBar.add(BackBtn);
-        TopBar.add(Title);
+        Time = new JLabel("Time: 000", SwingConstants.CENTER);
+        Time.setFont(FontLoader.Get("resources/fonts/AGENCYB.TTF", 15f));
+        Time.setVisible(false);
+
+        TopBar.add(HomeBtn, 0, 0);
+        TopBar.add(OptionsBtn, 0, 1);
+        TopBar.add(BackBtn, 0, 2);
+        TopBar.add(new JLabel(), 0, 3);
+        TopBar.add(Title, 0, 4);
+        TopBar.add(new JLabel(), 0, 5);
+        TopBar.add(new JLabel(), 0, 6);
+        TopBar.add(new JLabel(), 0, 7);
+        TopBar.add(Time, 0, 8);
     }
 
     public void SetTitle(String title) {
         Title.setText(title);
     }
 
-    public void BackBtnAction(Action action) {
-        BackBtn.Action(action);
+    public void ShowTime(boolean flag) {
+        Time.setVisible(flag);
+    }
+
+    public void BackBtnAction(Action action, String text) {
+        BackBtn.Action(action).Text(text);
     }
 
     public Rectangle GetTopBarBounds() {

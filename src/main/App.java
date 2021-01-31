@@ -44,8 +44,9 @@ public class App extends JFrame {
         View.setPreferredSize(Size());
         View.setLayout(ViewManager);
         View.setBackground(Color.decode("#E5EADE"));
-        View.add(new Motherboard(), "Motherboard");
         View.add(new Menu(), "Menu");
+        View.add(new Options(), "Options");
+        View.add(new Motherboard(), "Motherboard");
     }
 
     public static void ChangePage(String pageName) {
