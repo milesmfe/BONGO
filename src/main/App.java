@@ -43,7 +43,7 @@ public class App extends JFrame {
         View = new JPanel();
         View.setPreferredSize(Size());
         View.setLayout(ViewManager);
-        View.setBackground(Color.decode("#EDF0E8"));
+        View.setBackground(Color.decode("#E5EADE"));
         View.add(new Motherboard(), "Motherboard");
         View.add(new Menu(), "Menu");
     }

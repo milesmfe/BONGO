@@ -32,6 +32,7 @@ public class Game extends Page {
         SetTitle("New Game");
         requestFocus();
         ConfigureMouseListeners();
+        BackBtnAction(() -> DisperseParts());
     }
 
     public void ConfigureMouseListeners() {
@@ -125,7 +126,6 @@ public class Game extends Page {
         } 
         if (rect.intersects(_Project.getBounds())) { return true; }
         if (rect.intersects(GetTopBarBounds())) { return true; }
-        if (rect.intersects(GetBottomBarBounds())) { return true; }
         return false;
     }
 

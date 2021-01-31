@@ -18,8 +18,7 @@ public class Motherboard extends Game {
 
     public Motherboard() {
 
-        SetTitle("Motherboard");
-        ConfigureCustomBtn("Reset", () -> DisperseParts());
+        SetTitle("The Motherboard");
 
         new Part("resources/CPU.png", 58, 58)
             .Target(168, 22)

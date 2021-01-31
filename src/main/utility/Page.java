@@ -15,33 +15,23 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Rectangle;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 import main.App;
 
 public class Page extends JPanel {
     private static final long serialVersionUID = 1L;
     private JPanel TopBar;
-    private double TopBarCover = 0.05;
-    private JPanel BottomBar;
-    private double BottomBarCover = 0.05;
+    private double TopBarCover = 0.06;
     private ActionButton HomeBtn;
+    private ActionButton OptionsBtn; 
     private ActionButton BackBtn;
-    private ActionButton CustomBtn;
-    private Action HomeBtnAction;
-    private Action BackBtnAction;
-    private Action CustomBtnAction;
-    private JLabel Title = new JLabel();
+    private JLabel Title;
     
     public Page() {
         setOpaque(false);
         setLayout(null);
         setSize(App.Size());
         ConfigureTopBar();
-        ConfigureBottomBar();
-        ConfigureBackBtn(() -> App.LastPage());
-        ConfigureHomeBtn(() -> App.ChangePage("Menu"));
     }
 
     private void ConfigureTopBar() { 
@@ -50,64 +40,36 @@ public class Page extends JPanel {
         TopBar.setBounds(0, 0, getWidth(), (int)(getHeight() * TopBarCover));
         add(TopBar);
 
-        HomeBtn = new ActionButton("H");
+        HomeBtn = new ActionButton()
+            .Text("H")
+            .Action(() -> App.ChangePage("Menu"));
+        
+        OptionsBtn = new ActionButton()
+            .Text("O")
+            .Action(() -> App.ChangePage("Options"));
+
+        BackBtn = new ActionButton()
+            .Text("B")
+            .Action(() -> App.LastPage());
+
+        Title = new JLabel("New Page");
+        Title.setFont(FontLoader.Get("resources/fonts/AGENCYB.TTF", 15f));
+
         TopBar.add(HomeBtn);
-        HomeBtn.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e) {
-                HomeBtnAction.run();
-            }
-        });
-
-        BackBtn = new ActionButton("B");
+        TopBar.add(OptionsBtn);
         TopBar.add(BackBtn);
-        BackBtn.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e) {
-                BackBtnAction.run();
-            }
-        });
-
         TopBar.add(Title);
-    }
-
-    private void ConfigureBottomBar() {
-        BottomBar = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        BottomBar.setBackground(new Color(0, 0, 0, 10));
-        BottomBar.setBounds(0, getHeight() - (int)(getHeight() * BottomBarCover), getWidth(), (int)(getHeight() * BottomBarCover));
-        add(BottomBar);
-
-        CustomBtn = new ActionButton("");
-        CustomBtn.setVisible(false);
-        BottomBar.add(CustomBtn);
-        CustomBtn.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e) {
-                CustomBtnAction.run();
-            }
-        });
     }
 
     public void SetTitle(String title) {
         Title.setText(title);
     }
 
-    public void ConfigureBackBtn(Action action) {
-        BackBtnAction = action;
-    }
-
-    public void ConfigureHomeBtn(Action action) {
-        HomeBtnAction = action;
-    }
-
-    public void ConfigureCustomBtn(String text, Action action) {
-        CustomBtnAction = action;
-        CustomBtn.setText(text);
-        CustomBtn.setVisible(true);
+    public void BackBtnAction(Action action) {
+        BackBtn.Action(action);
     }
 
     public Rectangle GetTopBarBounds() {
         return TopBar.getBounds();
-    }
-
-    public Rectangle GetBottomBarBounds() {
-        return BottomBar.getBounds();
     }
 }
