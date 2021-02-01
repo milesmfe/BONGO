@@ -1,9 +1,9 @@
 /*
     ------------------------------------------------------
-    Name:           Options.java
+    Name:           Home.java
     Author:         Miles Edwards
     Date:           Jan 2021
-    Description:    Defines Options screen object
+    Description:    Defines Menu screen object
     ------------------------------------------------------
 */
 
@@ -11,10 +11,10 @@ package main;
 
 import main.utility.Menu;
 
-public class Options extends Menu {
+public class Home extends Menu {
     private static final long serialVersionUID = 1L;
     
-    public Options() {
-        SetTitle("Options");
+    public Home() {
+        SetTitle("Home");
     }
 }

@@ -15,6 +15,7 @@ import javax.swing.SwingUtilities;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.LinkedList;
 import java.awt.Color;
 import main.gamemodes.*;
 import main.utility.ImageLoader;
@@ -25,6 +26,8 @@ public class App extends JFrame {
             Toolkit.getDefaultToolkit().getScreenSize().width / 2,
             Toolkit.getDefaultToolkit().getScreenSize().height / 2); }
     private static CardLayout ViewManager = new CardLayout();
+    private static LinkedList<String> LastPages = new LinkedList<String>();
+    private static int Pointer = 0;
     private static JPanel View;
 
     public App() {
@@ -44,17 +47,22 @@ public class App extends JFrame {
         View.setPreferredSize(Size());
         View.setLayout(ViewManager);
         View.setBackground(Color.decode("#E5EADE"));
-        View.add(new Menu(), "Menu");
+        View.add(new Home(), "Home"); LastPages.add("Home");
         View.add(new Options(), "Options");
         View.add(new Motherboard(), "Motherboard");
     }
 
     public static void ChangePage(String pageName) {
         ViewManager.show(View, pageName);
+        LastPages.add(pageName); Pointer ++;
     }
 
     public static void LastPage() {
-        ViewManager.previous(View);
+        if (Pointer > 0) {
+            LastPages.removeLast();
+            Pointer --;
+        }
+        ViewManager.show(View, LastPages.get(Pointer));
     }
 
     public static void main(String[] args) throws Exception {

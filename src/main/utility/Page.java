@@ -44,7 +44,7 @@ public class Page extends JPanel {
 
         HomeBtn = new ActionButton()
             .Text("Home")
-            .Action(() -> App.ChangePage("Menu"));
+            .Action(() -> App.ChangePage("Home"));
         
         OptionsBtn = new ActionButton()
             .Text("Options")
