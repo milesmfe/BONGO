@@ -24,8 +24,17 @@ public class Node extends JLabel {
         super(ImageLoader.fromPathScaled(image, width, height));
     }
 
+    public Node(String image) {
+        super(ImageLoader.fromPath(image));
+    }
+
     public Node Add(Page Target) {
         Target.add(this);
+        return this;
+    }
+
+    public Node AddContent(Menu Target) {
+        Target.AddContent(this);
         return this;
     }
 }

@@ -10,6 +10,7 @@
 package main.utility;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 
@@ -21,6 +22,16 @@ public class ActionButton extends JLabel {
         super("Action", SwingConstants.CENTER);
         setFont(FontLoader.Get("resources/fonts/AGENCYB.TTF", 15f));
         addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                setCursor(new Cursor(Cursor.HAND_CURSOR));
+            }
+            @Override
+            public void mouseExited(MouseEvent e) { 
+                super.mouseExited(e);
+                setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+            }
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);

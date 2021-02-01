@@ -12,9 +12,11 @@ package main.utility;
 import javax.swing.JPanel;
 import javax.swing.JComponent;
 import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
 
 public class Menu extends Page {
     private static final long serialVersionUID = 1L;
+    public final GridBagConstraints CONSTRAINTS = new GridBagConstraints();
     private JPanel Content;
 
     public Menu() {
@@ -29,6 +31,6 @@ public class Menu extends Page {
     }
 
     public void AddContent(JComponent component) {
-        Content.add(component);
+        Content.add(component, CONSTRAINTS);
     }
 }
