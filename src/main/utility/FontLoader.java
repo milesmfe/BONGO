@@ -6,13 +6,11 @@ import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.io.IOException;
 
-import main.App;
-
 public class FontLoader {
 
     public static Font Get(String path, float size) {
         try {
-            Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File(App.class.getResource(path).getPath())).deriveFont(size);
+            Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/" + path)).deriveFont(size);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(customFont);
             return customFont;
