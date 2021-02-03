@@ -13,14 +13,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.event.*;
 import main.utility.FontLoader;
-import main.utility.ImageLoader;
 import main.utility.Menu;
+import main.utility.Node;
 import java.awt.GridLayout;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Font;
 
 public class Home extends Menu {
     private static final long serialVersionUID = 1L;
+    private Font LabelFont = FontLoader.Get("resources/fonts/AGENCYR.ttf", 30f);
     
     public Home() {
         SetTitle("Home");
@@ -31,9 +33,9 @@ public class Home extends Menu {
     public void BuildUI() {
         // Start
         JPanel StartPanel = new JPanel(); 
-        JLabel StartIcn = new JLabel(ImageLoader.fromPathScaled("resources/Play.png", 100, 100)); 
+        JLabel StartIcn = new Node("resources/Play.png", 100, 100); 
         JLabel StartTxt = new JLabel("Start"); 
-        StartTxt.setFont(FontLoader.Get("resources/fonts/AGENCYR.ttf", 30f)); 
+        StartTxt.setFont(LabelFont); 
         StartTxt.setForeground(Color.decode("#E04545")); 
         StartTxt.setVisible(false); 
         StartPanel.setOpaque(false); 
@@ -42,9 +44,9 @@ public class Home extends Menu {
 
         // Options
         JPanel OptionsPanel = new JPanel(); 
-        JLabel OptionsIcn = new JLabel(ImageLoader.fromPathScaled("resources/Options.png", 100, 100));
+        JLabel OptionsIcn = new Node("resources/Options.png", 100, 100);
         JLabel OptionsTxt = new JLabel("Options"); 
-        OptionsTxt.setFont(FontLoader.Get("resources/fonts/AGENCYR.ttf", 30f));
+        OptionsTxt.setFont(LabelFont);
         OptionsTxt.setForeground(Color.decode("#2D4B89")); 
         OptionsTxt.setVisible(false); 
         OptionsPanel.setOpaque(false);
@@ -52,7 +54,7 @@ public class Home extends Menu {
         OptionsPanel.add(OptionsTxt);
 
         // Title
-        JLabel title = new JLabel(ImageLoader.fromPath("resources/Title.gif"));
+        JLabel title = new Node("resources/Title.gif");
         AddContent(title); 
 
         // Side Panel
