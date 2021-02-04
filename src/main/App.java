@@ -22,9 +22,6 @@ import main.utility.ImageLoader;
 
 public class App extends JFrame {
     private static final long serialVersionUID = 1L;
-    public static Dimension Size() { return new Dimension(
-            Toolkit.getDefaultToolkit().getScreenSize().width / 2,
-            Toolkit.getDefaultToolkit().getScreenSize().height / 2); }
     private static CardLayout ViewManager = new CardLayout();
     private static LinkedList<String> LastPages = new LinkedList<String>();
     private static int Pointer = 0;
@@ -63,6 +60,12 @@ public class App extends JFrame {
             Pointer --;
         }
         ViewManager.show(View, LastPages.get(Pointer));
+    }
+
+    public static Dimension Size() { 
+        return new Dimension(
+            Toolkit.getDefaultToolkit().getScreenSize().width / 2,
+            Toolkit.getDefaultToolkit().getScreenSize().height / 2); 
     }
 
     public static void main(String[] args) throws Exception {
